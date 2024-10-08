@@ -240,54 +240,33 @@ const hebProfiles =  [
       "Total_weight": "314.00 kg"
     }
   ];
-// وظيفة لحساب الوزن
+
+// Function to calculate weight
 function calculateWeight() {
-    const selectedProfile = document.getElementById("hebProfiles").value;
-    const length = parseFloat(document.getElementById("lengthInput").value) || 1; // الحصول على قيمة الطول
-    const profile = hebProfiles.find(p => p.Profile === selectedProfile);
+  const selectedProfileHEA = document.getElementById("hebProfilesHEA").value;
+  const selectedProfileHEB = document.getElementById("hebProfilesHEB").value;
+  const length = parseFloat(document.getElementById("lengthInput").value) || 1; // Get length value
 
-    if (profile) {
-        // استخراج الوزن من السلسلة النصية وتحويله إلى رقم
-        const weightPerMeter = parseFloat(profile.Weight_per_meter.replace(" kg/m", ""));
-        const totalWeight = weightPerMeter * length; // حساب الوزن الإجمالي
+  // Determine which profile is selected
+  const profile = hebProfiles.find(p => p.Profile === selectedProfileHEA) || hebProfiles.find(p => p.Profile === selectedProfileHEB);
 
-        const profileData = `
-            <strong>Profile:</strong> ${profile.Profile} <br>
-            <strong>Height (mm):</strong> ${profile.Height_h} <br>
-            <strong>Width (mm):</strong> ${profile.Width_b} <br>
-            <strong>Thickness t (mm):</strong> ${profile.Thickness_s} <br>
-            <strong>Thickness s (mm):</strong> ${profile.Thickness_t} <br>
-            <strong>Weight per Meter (kg):</strong> ${weightPerMeter.toFixed(2)} <br>
-            <strong>Total Weight (kg):</strong> ${totalWeight.toFixed(2)} <!-- تحديث قيمة الوزن -->
-        `;
+  if (profile) {
+      // Extract weight from string and convert to number
+      const weightPerMeter = parseFloat(profile.Weight_per_meter.replace(" kg/m", ""));
+      const totalWeight = weightPerMeter * length; // Calculate total weight
 
-        document.getElementById("result").innerHTML = profileData;
-    } else {
-        document.getElementById("result").innerText = 'الرجاء ملء جميع الحقول المطلوبة.';
-    }
+      const profileData = `
+          <strong>Profile:</strong> ${profile.Profile} <br>
+          <strong>Height (mm):</strong> ${profile.Height_h} <br>
+          <strong>Width (mm):</strong> ${profile.Width_b} <br>
+          <strong>Thickness t (mm):</strong> ${profile.Thickness_s} <br>
+          <strong>Thickness s (mm):</strong> ${profile.Thickness_t} <br>
+          <strong>Weight per Meter (kg):</strong> ${weightPerMeter.toFixed(2)} <br>
+          <strong>Total Weight (kg):</strong> ${totalWeight.toFixed(2)} <!-- Update weight value -->
+      `;
+
+      document.getElementById("result").innerHTML = profileData;
+  } else {
+      document.getElementById("result").innerHTML = "<strong>الرجاء اختيار مقطع صحيح.</strong>"; // Error message if no profile is selected
+  }
 }
-
-// وظيفة لعرض كمبوكس البروفيلات عند تحميل الصفحة
-function showProfilesOnLoad() {
-    const hebProfilesContainer = document.getElementById("hebProfilesContainer");
-    const hebProfilesSelect = document.getElementById("hebProfiles");
-    const lengthInput = document.getElementById("lengthInput");
-
-    hebProfilesContainer.style.display = "block"; 
-    hebProfiles.forEach(profile => {
-        const option = document.createElement("option");
-        option.value = profile.Profile;
-        option.textContent = profile.Profile;
-        hebProfilesSelect.appendChild(option);
-    });
-
-    // إضافة حدث تغيير لعناصر الاختيار
-    hebProfilesSelect.addEventListener("change", calculateWeight);
-    lengthInput.addEventListener("input", calculateWeight); // حدث الإدخال لحساب الوزن تلقائيًا
-
-    // استدعاء دالة لحساب الوزن عند تحميل الصفحة
-    calculateWeight();
-}
-
-// استدعاء دالة العرض عند تحميل الصفحة
-window.onload = showProfilesOnLoad;
