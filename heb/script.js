@@ -240,20 +240,14 @@ const hebProfiles =  [
       "Total_weight": "314.00 kg"
     }
   ];
-
-// Function to calculate weight
+// وظيفة لحساب الوزن
 function calculateWeight() {
-  const selectedProfileHEA = document.getElementById("hebProfilesHEA").value;
-  const selectedProfileHEB = document.getElementById("hebProfilesHEB").value;
-  const length = parseFloat(document.getElementById("lengthInput").value) || 1; // Get length value
-
-  // Determine which profile is selected
-  const profile = hebProfiles.find(p => p.Profile === selectedProfileHEA) || hebProfiles.find(p => p.Profile === selectedProfileHEB);
+  const selectedProfile = document.getElementById("hebProfiles").value;
+  const length = parseFloat(document.getElementById("lengthInput").value) || 1; // الحصول على قيمة الطول
+  const profile = hebProfiles.find(p => p.Profile === selectedProfile);
 
   if (profile) {
-      // Extract weight from string and convert to number
-      const weightPerMeter = parseFloat(profile.Weight_per_meter.replace(" kg/m", ""));
-      const totalWeight = weightPerMeter * length; // Calculate total weight
+      const weight = profile.Weight_per_meter * length; // حساب الوزن الإجمالي
 
       const profileData = `
           <strong>Profile:</strong> ${profile.Profile} <br>
@@ -261,12 +255,37 @@ function calculateWeight() {
           <strong>Width (mm):</strong> ${profile.Width_b} <br>
           <strong>Thickness t (mm):</strong> ${profile.Thickness_s} <br>
           <strong>Thickness s (mm):</strong> ${profile.Thickness_t} <br>
-          <strong>Weight per Meter (kg):</strong> ${weightPerMeter.toFixed(2)} <br>
-          <strong>Total Weight (kg):</strong> ${totalWeight.toFixed(2)} <!-- Update weight value -->
+          <strong>Weight per Meter (kg):</strong> ${profile.Weight_per_meter} <br>
+          <strong>Total Weight (kg):</strong> ${weight.toFixed(2)}  <!-- تحديث قيمة الوزن -->
       `;
 
       document.getElementById("result").innerHTML = profileData;
   } else {
-      document.getElementById("result").innerHTML = "<strong>الرجاء اختيار مقطع صحيح.</strong>"; // Error message if no profile is selected
+      document.getElementById("result").innerText = 'الرجاء ملء جميع الحقول المطلوبة.';
   }
 }
+
+// وظيفة لعرض كمبوكس البروفيلات عند تحميل الصفحة
+function showProfilesOnLoad() {
+  const heaProfilesContainer = document.getElementById("heaProfilesContainer");
+  const heaProfilesSelect = document.getElementById("heaProfiles");
+  const lengthInput = document.getElementById("lengthInput");
+
+  heaProfilesContainer.style.display = "block"; 
+  heaProfiles.forEach(profile => {
+      const option = document.createElement("option");
+      option.value = profile.Profile;
+      option.textContent = profile.Profile;
+      heaProfilesSelect.appendChild(option);
+  });
+
+  // إضافة حدث تغيير لعناصر الاختيار
+  heaProfilesSelect.addEventListener("change", calculateWeight);
+  lengthInput.addEventListener("input", calculateWeight); // حدث الإدخال لحساب الوزن تلقائيًا
+
+  // استدعاء دالة لحساب الوزن عند تحميل الصفحة
+  calculateWeight();
+}
+
+// استدعاء دالة العرض عند تحميل الصفحة
+window.onload = showProfilesOnLoad;

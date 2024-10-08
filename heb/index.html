@@ -16,34 +16,31 @@
         <div id="sectionImageContainer" style="display:none;">
             <img src="" alt="Section Image" id="sectionImage" />
         </div>
-        
         <div id="hebProfilesContainer" style="display:none;">
-            <label for="hebProfilesHEA">مقاطع HEB:</label>
-            <select id="hebProfilesHEA" onchange="calculateWeight()"></select>
-            <label for="lengthInput">الطول (م):</label>
-            <input type="number" id="lengthInput" value="1" min="1" oninput="calculateWeight()" />
+            <label for="hebProfiles">Profile of HEB:</label>
+            <select id="hebProfiles"></select>
+            <label for="lengthInput">طول (متر):</label>
+            <input type="number" id="lengthInput" value="1" min="1" />
         </div>
         
         <div id="hebProfilesContainer" style="display:none;">
-            <label for="hebProfilesHEB">مقاطع HEB:</label>
-            <select id="hebProfilesHEB" onchange="calculateWeight()"></select>
+            <label for="hebProfiles">Profile of HEB:</label>
+            <select id="hebProfiles"></select>
         </div>
 
         <div id="result"></div>
-        <img src="images/heb.png" alt="صورة إضافية" class="additional-image"> <!-- استخدم مسارًا صحيحًا للصورة -->
-
-        <!-- زر الرجوع إلى الصفحة الرئيسية -->
-        <div class="back-button-container">
+        <img src="images/heb.png" alt="Another Image" class="additional-image"> <!-- استخدم مسارًا صحيحًا للصورة -->
+         <!-- زر الرجوع إلى الصفحة الرئيسية -->
+         <div class="back-button-container">
             <button onclick="goBack()">Back to Home</button>
         </div>
     </div>
 
+    <script src="script.js"></script>
     <script>
         function goBack() {
             window.location.href = "https://mohmohragrag.github.io/Elsafwa_Calculator/index.html"; // المسار الخاص بك
         }
     </script>
-
-    <script src="script.js"></script>
 </body>
 </html>
