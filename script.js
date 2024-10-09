@@ -10,7 +10,7 @@ const steelSections = {
     "Equal Angles": ["Length (mm)", "Leg Length (mm)", "Thickness (mm)"],
     "Unequal Angles": ["Length (mm)", "Leg Length 1 (mm)", "Leg Length 2 (mm)", "Thickness (mm)"],
     "T-profile": ["Length (mm)", "Width (mm)", "Height (mm)", "Thickness (mm)"], // Added dimensions for T-profile
-    "Hexagonal Sections": ["Length (mm)", "Side (mm)"]
+    "Hexagonal Sections": ["Length (mm)", "Outer (mm)"]
 };
 
 function showFields() {
