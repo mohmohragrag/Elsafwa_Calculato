@@ -37,7 +37,7 @@ function calculateWeight() {
     
     if (profile && !isNaN(length) && length > 0) {
         const weightPerMeter = profile.Weight_per_meter_kg_m; 
-        const totalWeight = weightPerMeter * length; // Calculate total weight
+        const totalWeight = weightPerMeter * length / 1000; // Calculate total weight
 
         // Prepare data for display
         const profileData = `

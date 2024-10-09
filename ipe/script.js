@@ -194,7 +194,7 @@ function calculateWeight() {
     
     if (profile && !isNaN(length) && length > 0) {
         const weightPerMeter = profile.Weight_per_meter; 
-        const totalWeight = weightPerMeter * length; // حساب الوزن الإجمالي
+        const totalWeight = weightPerMeter * length / 1000; // حساب الوزن الإجمالي
 
         // إعداد البيانات لعرضها
         const profileData = `

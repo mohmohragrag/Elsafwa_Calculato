@@ -261,7 +261,7 @@ function calculateWeight() {
     const profile = heaProfiles.find(p => p.Profile === selectedProfile);
 
     if (profile) {
-        const weight = profile.Weight_per_meter * length; // حساب الوزن الإجمالي
+        const weight = profile.Weight_per_meter * length / 1000; // حساب الوزن الإجمالي
 
         const profileData = `
             <strong>Profile:</strong> ${profile.Profile} <br>
