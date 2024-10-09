@@ -1,7 +1,7 @@
 const steelSections = {
     "Steel Plates and Sheets": ["Length (mm)", "Width (mm)", "Thickness (mm)"],
     "Chequered Steel Plates": ["Length (mm)", "Width (mm)", "Thickness (mm)"], // الصاج البقلاوه
-    "ERW Steel Pipes - Circular": ["Length (mm)", "Outer Diameter (mm)", "Thickness (mm)"],
+    "Seamless Steel Pipes - Circular": ["Length (mm)", "Outer Diameter (mm)", "Thickness (mm)"],
     "Hollow Structural Sections - Square": ["Length (mm)", "Side Length (mm)", "Thickness (mm)"],
     "Hollow Structural Sections - Rectangular": ["Length (mm)", "Width (mm)", "Height (mm)", "Thickness (mm)"],
     "Round Steel Bars": ["Length (mm)", "Diameter (mm)"],
@@ -80,7 +80,7 @@ function calculateWeight() {
                 weight = (lengthCheq / 1000) * (widthCheq / 1000) * (adjustedThickness / 1000) * density; // حساب الوزن
                 break;
                 
-            case "ERW Steel Pipes - Circular":
+            case "Seamless Steel Pipes - Circular":
                 const [lengthPipe, outerDiameter, thicknessPipe] = values;
                 const innerDiameter = outerDiameter - 2 * thicknessPipe;
                 weight = (lengthPipe / 1000) * (Math.PI / 4) * (Math.pow(outerDiameter / 1000, 2) - Math.pow(innerDiameter / 1000, 2)) * density; // in kg
